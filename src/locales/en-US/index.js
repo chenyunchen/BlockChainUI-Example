@@ -1,7 +1,7 @@
 import basic from './basic'
 
 export default {
-  'parentLocale': 'en',
+  'parentLocale': 'en-US',
   'displayLocale': 'English',
   ...basic
 }

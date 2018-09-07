@@ -6,13 +6,15 @@ import store, { history } from './store/configureStore'
 import App from './routes'
 import registerServiceWorker from './registerServiceWorker'
 
+import LocaleContainer from './containers/LocaleContainer'
+
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
+    <LocaleContainer>
+      <ConnectedRouter history={history}>
         <App />
-      </div>
-    </ConnectedRouter>
+      </ConnectedRouter>
+    </LocaleContainer>
   </Provider>,
   document.getElementById('root')
 )

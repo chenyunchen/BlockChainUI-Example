@@ -1,46 +1,31 @@
 import React from 'react'
-import { push } from 'connected-react-router'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync
-} from '../../store/exchange/reducer'
+import { updateLocale } from '../../store/exchange/reducer'
+
+import { FormattedMessage } from 'react-intl'
 
 const Home = props => (
   <div>
     <h1>Home</h1>
     <p>Count: {props.count}</p>
 
-    <p>
-      <button onClick={props.increment}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>Increment Async</button>
-    </p>
-
-    <p>
-      <button onClick={props.decrement}>Decrementing</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>Decrement Async</button>
-    </p>
-
-    <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
+    <p><FormattedMessage id="test" /></p>
+    <p><button onClick={() => props.changeLanguage('zh-TW')}>Change Language</button></p>
   </div>
 )
 
-const mapStateToProps = ({ counter }) => ({
-  count: counter.count,
-  isIncrementing: counter.isIncrementing,
-  isDecrementing: counter.isDecrementing
-})
+const mapStateToProps = (state) => {
+  return ({
+    count: state.exchangeReducer.count,
+    isIncrementing: state.exchangeReducer.isIncrementing,
+    isDecrementing: state.exchangeReducer.isDecrementing
+  })
+}
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
-  changePage: () => push('/about-us')
-}, dispatch)
+const mapDispatchToProps = dispatch => ({
+  changeLanguage: (newLocale: string) =>
+    dispatch(updateLocale({ locale: newLocale })),
+})
 
 export default connect(
   mapStateToProps,

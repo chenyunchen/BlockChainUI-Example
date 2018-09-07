@@ -8,11 +8,13 @@ import registerServiceWorker from './registerServiceWorker'
 
 import LocaleContainer from './containers/LocaleContainer'
 
+import './App.css'
+
 ReactDOM.render(
   <Provider store={store}>
     <LocaleContainer>
       <ConnectedRouter history={history}>
-        <App />
+        <App className="App" />
       </ConnectedRouter>
     </LocaleContainer>
   </Provider>,

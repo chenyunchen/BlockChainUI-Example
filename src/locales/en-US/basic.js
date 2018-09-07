@@ -1,3 +1,6 @@
 export default {
-  'test': 'Test'
+  'prices': 'PRICES',
+  'wallet': 'WALLET',
+  'account': 'ACCOUNT',
+  'input': 'Input USD Amount'
 }

@@ -22,7 +22,7 @@ const getAntLocale = (locale) => {
     case 'zh-TW':
       return zh_TW
     default:
-      return en_US
+      return zh_TW
   }
 }
 
@@ -50,8 +50,8 @@ class LocaleContainer extends React.Component {
   render() {
     const { props } = this
     return (
-      <LocaleProvider locale={props.antLocale}>
-        <IntlProvider key={props.locale} locale={props.locale} messages={props.messages}>
+      <LocaleProvider key={props.locale} locale={props.antLocale}>
+        <IntlProvider locale={props.locale} messages={props.messages}>
           {props.children}
         </IntlProvider>
       </LocaleProvider>

@@ -1,0 +1,12 @@
+.card {
+  width: 360px;
+  height: 182px;
+}
+
+.input {
+  text-align: center !important;
+  width: 300px !important;
+  height: 43px !important;
+  font-size: 32px !important;
+  margin-bottom: 60px !important;
+}

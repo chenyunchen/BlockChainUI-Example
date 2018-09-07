@@ -1,12 +1,14 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Home from './home'
-import About from './about'
+import Prices from './prices'
+import Wallet from './wallet'
+import Account from './account'
 
 const App = () => (
   <div>
-    <Route exact path="/:lng" component={Home} />
-    <Route exact path="/:lng/about-us" component={About} />
+    <Route exact path="/:lng/prices" component={Prices} />
+    <Route exact path="/:lng/wallet" component={Wallet} />
+    <Route exact path="/:lng/account" component={Account} />
   </div>
 )
 

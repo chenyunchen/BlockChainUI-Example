@@ -8,13 +8,14 @@ import registerServiceWorker from './registerServiceWorker'
 
 import LocaleContainer from './containers/LocaleContainer'
 
-import './App.css'
+import 'antd/dist/antd.css'
+import * as styles from './App.css';
 
 ReactDOM.render(
   <Provider store={store}>
     <LocaleContainer>
       <ConnectedRouter history={history}>
-        <App className="App" />
+        <App className={styles.App} />
       </ConnectedRouter>
     </LocaleContainer>
   </Provider>,

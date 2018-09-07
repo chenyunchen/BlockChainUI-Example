@@ -1,36 +1,62 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Layout, Menu } from 'antd'
+import { updateLocale } from '../../store/exchange/reducer'
+import { Layout, Menu, Select } from 'antd'
+import { Link } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
+import * as styles from './styles.module.css'
 
-const { Content, Header, Footer } = Layout
+const { Content, Header } = Layout
 
 const MenuItem = Menu.Item
+const Option = Select.Option;
+
 
 class MainLayout extends React.Component {
+  handleChangeLanguage = (lng) => {
+    const page = this.props.history.location.pathname.split('/')[2]
+    this.props.history.push(`/${lng}/${page}`)
+  }
+
   render() {
     return (
       <Layout className="layout">
-        <Header>
-          <div className="logo" />
+        <Header className={styles.header}>
           <Menu
-            theme="dark"
+            theme="light"
             mode="horizontal"
-            defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
+            style={{ lineHeight: '58px' }}
           >
-            <MenuItem key="1">nav 1</MenuItem>
-            <MenuItem key="2">nav 2</MenuItem>
-            <MenuItem key="3">nav 3</MenuItem>
+            <MenuItem>
+              <Link to={`/${this.props.locale}/prices`}>
+                <FormattedMessage id="prices" />
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={`/${this.props.locale}/wallet`}>
+                <FormattedMessage id="wallet" />
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={`/${this.props.locale}/account`}>
+                <FormattedMessage id="account" />
+              </Link>
+            </MenuItem>
+            <Select
+              className={styles.select}
+              value={this.props.locale}
+              onChange={this.handleChangeLanguage}
+            >
+              <Option value="zh-TW">繁體中文</Option>
+              <Option value="en-US">English</Option>
+            </Select>
           </Menu>
         </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+        <Content>
+          <div style={{ background: '#fff', padding: 24, minHeight: '100%' }}>
             {this.props.children}
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
       </Layout>
     )
   }
@@ -44,6 +70,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
+ changeLanguage: (newLocale: string) =>
+  dispatch(updateLocale({ locale: newLocale })),
 })
 
 export default connect(

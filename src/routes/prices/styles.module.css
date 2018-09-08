@@ -1,12 +1,18 @@
 .card {
-  width: 360px;
-  height: 182px;
+  width: 360px !important;
+  height: 200px;
+  word-wrap:break-word;
+  overflow: hidden;
+  margin-right: 20px;
 }
 
 .input {
   text-align: center !important;
-  width: 300px !important;
   height: 43px !important;
   font-size: 32px !important;
   margin-bottom: 60px !important;
+}
+
+.icon {
+  font-size: 80px !important;
 }

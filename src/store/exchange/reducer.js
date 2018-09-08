@@ -5,7 +5,16 @@ export const FETCH_EXCHANGE = 'exchange/FETCH_EXCHANGE'
 const initialState = {
   locale: 'zh-TW',
   options: [],
-  exchange: {}
+  exchange: {
+    data: {
+      rates: {
+        BTC: 0,
+        ETH: 0,
+        LTC: 0,
+        ETC: 0
+      }
+    }
+  }
 }
 
 export default (state = initialState, action) => {

@@ -11,3 +11,10 @@
   margin-left: 10px !important;
   border-radius: 50px !important;
 }
+
+.menu {
+  position: relative !important;
+  float: right !important;
+  line-height: 59px !important;
+  margin-right: 10px !important;
+}

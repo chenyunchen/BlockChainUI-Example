@@ -4,14 +4,22 @@ import {
   updateLocale,
   fetchExchange
 } from '../../store/exchange/reducer'
-import { Card, Row, Col, Input } from 'antd'
+import { Card, Row, Col, Input, Icon } from 'antd'
 import  MainLayout from '../../layouts/MainLayout'
 import { injectIntl } from 'react-intl'
 import * as styles from './styles.module.css'
 
+import BTCSvg from '../../assets/icon/btc.svg'
+import ETHSvg from '../../assets/icon/eth.svg'
+import LTCSvg from '../../assets/icon/ltc.svg'
+import ETCSvg from '../../assets/icon/etc.svg'
+
 class Prices extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      input: ''
+    }
     this.changeLanguage(props.match.params.lng)
   }
 
@@ -36,41 +44,76 @@ class Prices extends React.Component {
     }
   }
 
+  handleInput = (e) => {
+    const input = e.target.value
+    const regex = /^\d*(\.\d{0,2})?$/
+    if (regex.test(input)) {
+      this.setState({ input })
+    }
+  }
+
+  renderCard = (cardData) => {
+    const { input } = this.state
+    const { rates } = this.props.exchange.data
+    return (
+      <Row type="flex" justify="center">
+        {cardData.map(data => {
+          return (
+            <Card key={data.name} className={styles.card}>
+              <Row>
+                <Col span={18}>
+                  <h1>{data.name}</h1>
+                  <p>{`(${data.abbr})`}</p>
+                </Col>
+                <Col span={2}>
+                  <Icon className={styles.icon} component={data.icon} />
+                </Col>
+              </Row>
+              <h1>{input * rates[data.abbr]}</h1>
+            </Card>
+          )
+        })}
+      </Row>
+    )
+  }
+
   render() {
-    const placeholder = this.props.intl.formatMessage({id: 'input'});
-    console.log(this.props.exchange)
+    const placeholder = this.props.intl.formatMessage({id: 'input'})
+    const cardData = [
+      {
+        name: "Bitcoin",
+        abbr: "BTC",
+        icon: BTCSvg
+      },
+      {
+        name: "Ethereum",
+        abbr: "ETH",
+        icon: ETHSvg
+      },
+      {
+        name: "Litecoin",
+        abbr: "LTC",
+        icon: LTCSvg
+      },
+      {
+        name: "Ethereum Classic",
+        abbr: "ETC",
+        icon: ETCSvg
+      }
+    ]
     return (
       <MainLayout history={this.props.history}>
         <Row type="flex" justify="center">
           <Col span={5}>
-            <Input className={styles.input} placeholder={placeholder} />
+            <Input
+               className={styles.input}
+               placeholder={placeholder}
+               value={this.state.input}
+               onChange={this.handleInput}
+            />
           </Col>
         </Row>
-        <Row type="flex" justify="center">
-          <Col span={6}>
-            <Card className={styles.card}>
-              <p>Card content</p>
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className={styles.card}>
-              <p>Card content</p>
-            </Card>
-          </Col>
-        </Row>
-        <br />
-        <Row type="flex" justify="center">
-          <Col span={6}>
-            <Card className={styles.card}>
-              <p>Card content</p>
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card className={styles.card}>
-              <p>Card content</p>
-            </Card>
-          </Col>
-        </Row>
+        {this.renderCard(cardData)}
       </MainLayout>
     )
   }

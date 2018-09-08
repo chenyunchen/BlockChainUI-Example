@@ -32,7 +32,7 @@ class Wallet extends React.Component {
       <MainLayout history={this.props.history}>
         <Row type="flex" justify="center">
           <Col span={4}>
-            <h1>Coming Soon</h1>
+            <h1 style={{ marginTop: '100%' }}>Coming Soon</h1>
           </Col>
         </Row>
       </MainLayout>

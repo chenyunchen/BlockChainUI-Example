@@ -23,9 +23,9 @@ class MainLayout extends React.Component {
       <Layout className="layout">
         <Header className={styles.header}>
           <Menu
+            className={styles.menu}
             theme="light"
             mode="horizontal"
-            style={{ lineHeight: '58px' }}
           >
             <MenuItem>
               <Link to={`/${this.props.locale}/prices`}>
@@ -52,7 +52,7 @@ class MainLayout extends React.Component {
             </Select>
           </Menu>
         </Header>
-        <Content>
+        <Content style={{ background: '#fff', minHeight: '100%' }}>
           <div style={{ background: '#fff', padding: 24, minHeight: '100%' }}>
             {this.props.children}
           </div>
